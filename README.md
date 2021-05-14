@@ -17,9 +17,10 @@ sudo make docker-build
 sudo make docker-start-interactive
 ```
 You can also download the builded docker directly from [dro-sfm-image.tar](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/dro-sfm/dro-sfm-image.tar)
-'''bash
+
+```bash
 docker load < dro-sfm-image.tar
-'''
+```
 
 + If you would rather not use docker, you could create a environment via following the steps in the Dockerfile.
 
