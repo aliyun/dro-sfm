@@ -1,11 +1,27 @@
 ## DRO: Deep Recurrent Optimizer for Structure-from-Motion
-Official PyTorch implementation of [DRO](https://arxiv.org/abs/2103.13201)
+
+This is the official PyTorch implementation code for DRO-sfm. For technical details, please refer to:
+
+**DRO: Deep Recurrent Optimizer for Structure-from-Motion** <br />
+Xiaodong Gu\*, Weihao Yuan\*, Zuozhuo Dai, Chengzhou Tang, Siyu Zhu, Ping Tan <br />
+**[[Paper](https://arxiv.org/abs/2103.13201)]** <br />
 
 <p float="left">
   <img src="/media/figs/demo_kitti.gif" width="400" />
   <img src="/media/figs/demo_scannet.gif" width="400" /> 
 </p>
 
+## Bibtex
+If you find this code useful in your research, please cite:
+
+```
+@article{gu2021dro,
+  title={DRO: Deep Recurrent Optimizer for Structure-from-Motion},
+  author={Gu, Xiaodong and Yuan, Weihao and Dai, Zuozhuo and Tang, Chengzhou and Zhu, Siyu and Tan, Ping},
+  journal={arXiv preprint arXiv:2103.13201},
+  year={2021}
+}
+```
 
 ## Install
 + We recommend using [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker) to have a reproducible environment. 
@@ -16,13 +32,13 @@ cd dro-sfm
 sudo make docker-build
 sudo make docker-start-interactive
 ```
-You can also download the builded docker directly from [dro-sfm-image.tar](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/dro-sfm/dro-sfm-image.tar)
+You can also download the built docker directly from [dro-sfm-image.tar](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/dro-sfm/dro-sfm-image.tar)
 
 ```bash
 docker load < dro-sfm-image.tar
 ```
 
-+ If you would rather not use docker, you could create a environment via following the steps in the Dockerfile.
++ If you would rather not use docker, you could create an environment via following the steps in the Dockerfile.
 
 ```bash
 # Environment variables
@@ -67,15 +83,15 @@ Datasets are assumed to be downloaded in `/data/datasets/<dataset-name>` (can be
 
 ### KITTI
 The KITTI (raw) dataset used in our experiments can be downloaded from the [KITTI website](http://www.cvlibs.net/datasets/kitti/raw_data.php).
-For convenience, can download data from [packnet](https://tri-ml-public.s3.amazonaws.com/github/packnet-sfm/datasets/KITTI_raw.tar.gz) or [here](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/dro-sfm/datasets/KITTI_raw.tar)
+For convenience, you can download data from [packnet](https://tri-ml-public.s3.amazonaws.com/github/packnet-sfm/datasets/KITTI_raw.tar.gz) or [here](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/dro-sfm/datasets/KITTI_raw.tar)
 
 ### Tiny KITTI
-For simple tests, can download a "tiny" version of [KITTI](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/dro-sfm/datasets/KITTI_tiny.tar):
+For simple tests, you can download a "tiny" version of [KITTI](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/dro-sfm/datasets/KITTI_tiny.tar):
 
 
 ### Scannet
 The Scannet (raw) dataset used in our experiments can be downloaded from the [Scannet website](http://www.scan-net.org). 
-For convenience, can download data from [here](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/dro-sfm/datasets/scannet.tar)
+For convenience, you can download data from [here](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/dro-sfm/datasets/scannet.tar)
 
 
 ### DeMoN
@@ -142,18 +158,6 @@ python scripts/infer.py --checkpoint <checkpoint.ckpt> --input <image or folder>
 |[scannet_sup(view5)](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/dro-sfm/models/indoor_scannet_view5.ckpt) |0.047 |0.014 | 0.151 | 0.072 | 0.976 | 0.996 | 0.999| 0.071 | 0.030 | 0.456| 8.502| 1.163|
 |[scannet_selfsup](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/dro-sfm/models/indoor_scannet_selfsup.ckpt) | 0.143 | 0.345 | 0.656 | 0.274 | 0.896 | 0.954 | 0.969|0.272 | 0.106 | 0.609| 10.779| 1.393 |
 
-
-## Citation
-If you find this code useful in your research, please cite:
-
-```
-@article{gu2021dro,
-  title={DRO: Deep Recurrent Optimizer for Structure-from-Motion},
-  author={Gu, Xiaodong and Yuan, Weihao and Dai, Zuozhuo and Zhu, Siyu and Tang, Chengzhou and Tan, Ping},
-  journal={arXiv preprint arXiv:2103.13201},
-  year={2021}
-}
-```
 
 
 ## Acknowledgements
