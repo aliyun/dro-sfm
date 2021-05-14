@@ -16,6 +16,10 @@ cd dro-sfm
 sudo make docker-build
 sudo make docker-start-interactive
 ```
+You can also download the builded docker directly from [dro-sfm-image.tar](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/dro-sfm/dro-sfm-image.tar)
+'''bash
+docker load < dro-sfm-image.tar
+'''
 
 + If you would rather not use docker, you could create a environment via following the steps in the Dockerfile.
 
@@ -70,7 +74,7 @@ For simple tests, can download a "tiny" version of [KITTI](https://virutalbuy-pu
 
 ### Scannet
 The Scannet (raw) dataset used in our experiments can be downloaded from the [Scannet website](http://www.scan-net.org). 
-For convenience, can download data from [here](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/dro-sfm/datasets/KITTI_raw.tar)
+For convenience, can download data from [here](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/dro-sfm/datasets/scannet.tar)
 
 
 ### DeMoN
@@ -152,4 +156,4 @@ If you find this code useful in your research, please cite:
 
 
 ## Acknowledgements
-Thanks to Toyota Research Institute for opening source of excellent work [packnet-sfm](https://github.com/TRI-ML/packnet-sfm). Thanks toZachary Teed for opening source of his excellent work [RAFT](https://github.com/princeton-vl/RAFT).
+Thanks to Toyota Research Institute for opening source of excellent work [packnet-sfm](https://github.com/TRI-ML/packnet-sfm). Thanks to Zachary Teed for opening source of his excellent work [RAFT](https://github.com/princeton-vl/RAFT).
