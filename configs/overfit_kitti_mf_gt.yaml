@@ -1,0 +1,55 @@
+name: 'overfit_kitti_gt'
+arch:
+    max_epochs: 50
+checkpoint:
+    save_top_k: 10
+    monitor: 'abs_rel_pp_gt'
+    monitor_index: 0
+model:
+    name: 'SupModelMF'
+    optimizer:
+        name: 'Adam'
+        depth:
+            lr: 0.0002
+        pose:
+            lr: 0.0002
+    scheduler:
+        name: 'StepLR'
+        step_size: 30
+        gamma: 0.5
+    depth_net:
+        name: 'DepthPoseNet'
+        version: 'it12-h-out'
+    loss: 
+        automask_loss: True
+        photometric_reduce_op: 'min'
+    params:
+        crop: 'garg'
+        min_depth: 0.2
+        max_depth: 80.0
+datasets:
+    augmentation:
+        image_shape: (192, 640)
+    train:
+        batch_size: 4   
+        dataset: ['KITTI']
+        path: ['/data/datasets/kitti/KITTI_tiny']
+        split: ['kitti_tiny.txt']
+        depth_type: ['velodyne']
+        repeat: [100]
+        forward_context: 1
+        back_context: 1
+    validation:
+        dataset: ['KITTI']
+        path: ['/data/datasets/kitti/KITTI_tiny']
+        split: ['kitti_tiny.txt']
+        depth_type: ['velodyne']
+        forward_context: 1
+        back_context: 1
+    test:
+        dataset: ['KITTI']
+        path: ['/data/datasets/kitti/KITTI_tiny']
+        split: ['kitti_tiny.txt']
+        depth_type: ['velodyne']
+        forward_context: 1
+        back_context: 1

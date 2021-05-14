@@ -1,0 +1,55 @@
+name: 'sun3d_gt'
+arch:
+    max_epochs: 100
+checkpoint:
+    save_top_k: 10
+    monitor: 'abs_rel_pp_gt'
+    monitor_index: 0
+model:
+    name: 'SupModelMF'
+    optimizer:
+        name: 'Adam'
+        depth:
+            lr: 0.0002
+        pose:
+            lr: 0.0002
+    scheduler:
+        name: 'StepLR'
+        step_size: 30
+        gamma: 0.5
+    depth_net:
+        name: 'DepthPoseNet'
+        version: 'it12-h-out'
+    loss: 
+        automask_loss: True
+        photometric_reduce_op: 'min'
+    params:
+        crop: ''
+        min_depth: 0.2
+        max_depth: 10.0
+datasets:
+    augmentation:
+        image_shape: (240, 320)
+    train:
+        batch_size: 12
+        dataset: ['DemonMF']
+        path: ['/data/datasets/demon/train']
+        split: ['sun3d_train.txt']
+        depth_type: ['groundtruth']
+        repeat: [1]
+        forward_context: 1
+        back_context: 0
+    validation:
+        dataset: ['Demon']
+        path: ['/data/datasets/demon/test']
+        split: ['sun3d_test.txt']
+        depth_type: ['groundtruth']
+        forward_context: 1
+        back_context: 1
+    test:
+        dataset: ['Demon']
+        path: ['/data/datasets/demon/test']
+        split: ['sun3d_test.txt']
+        depth_type: ['groundtruth']
+        forward_context: 1
+        back_context: 1

@@ -1,0 +1,58 @@
+name: 'kitti_gt'
+save:
+    folder: './results'
+arch:
+    max_epochs: 50
+checkpoint:
+    save_top_k: 10
+    monitor: 'abs_rel_pp_gt'
+    monitor_index: 0
+model:
+    name: 'SupModelMF'
+    optimizer:
+        name: 'Adam'
+        depth:
+            lr: 0.0002
+        pose:
+            lr: 0.0002
+    scheduler:
+        name: 'StepLR'
+        step_size: 30
+        gamma: 0.5
+    depth_net:
+        name: 'DepthPoseNet'
+        version: 'it12-h'
+    loss: 
+        automask_loss: True
+        photometric_reduce_op: 'min'
+    params:
+        crop: 'garg'
+        min_depth: 0.2
+        max_depth: 80.0
+datasets:
+    augmentation:
+        image_shape: (320, 960)
+    train:
+        batch_size: 2
+        dataset: ['KITTI']
+        path: ['/data/datasets/kitti/KITTI_raw']
+        split: ['data_splits/eigen_zhou_files.txt']
+        depth_type: ['groundtruth']
+        repeat: [2]
+        forward_context: 1
+        back_context: 1
+    validation:
+        dataset: ['KITTI']
+        path: ['/data/datasets/kitti/KITTI_raw']
+        split: ['data_splits/eigen_val_files.txt',
+                'data_splits/eigen_test_files.txt']
+        depth_type: ['groundtruth']
+        forward_context: 1
+        back_context: 0
+    test:
+        dataset: ['KITTI']
+        path: ['/data/datasets/kitti/KITTI_raw']
+        split: ['data_splits/eigen_test_files.txt']
+        depth_type: ['groundtruth']
+        forward_context: 1
+        back_context: 0

@@ -1,0 +1,52 @@
+name: 'kitt_selfsup_view3'
+arch:
+    max_epochs: 50
+model:
+    name: 'SelfSupModelMF'
+    optimizer:
+        name: 'Adam'
+        depth:
+            lr: 0.0002
+        pose:
+            lr: 0.0002
+    scheduler:
+        name: 'StepLR'
+        step_size: 30
+        gamma: 0.5
+    depth_net:
+        name: 'DepthPoseNet'
+        version: 'it8-seq4-inter-out'
+    loss:
+        automask_loss: True
+        photometric_reduce_op: 'min'
+    params:
+        crop: 'garg'
+        min_depth: 0.5
+        max_depth: 80.0
+datasets:
+    augmentation:
+        image_shape: (320, 960)
+    train:
+        batch_size: 2
+        dataset: ['KITTI']
+        path: ['/data/datasets/kitti/KITTI_raw']
+        split: ['data_splits/eigen_zhou_files.txt']
+        depth_type: ['groundtruth']
+        repeat: [2]
+        forward_context: 1
+        back_context: 1
+    validation:
+        dataset: ['KITTI']
+        path: ['/data/datasets/kitti/KITTI_raw']
+        split: ['data_splits/eigen_val_files.txt',
+                'data_splits/eigen_test_files.txt']
+        depth_type: ['groundtruth']
+        forward_context: 1
+        back_context: 0
+    test:
+        dataset: ['KITTI']
+        path: ['/data/datasets/kitti/KITTI_raw']
+        split: ['data_splits/eigen_test_files.txt']
+        depth_type: ['groundtruth']
+        forward_context: 1
+        back_context: 0

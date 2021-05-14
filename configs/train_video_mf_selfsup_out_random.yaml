@@ -1,0 +1,59 @@
+name: 'video_selfsup_out_random'
+arch:
+    max_epochs: 10
+checkpoint:
+    save_top_k: -1
+    monitor: 'abs_rel_pp_gt'
+    monitor_index: 0
+model:
+    checkpoint_path: "results/indoor_scannet.ckpt" #pretrain model
+    name: 'SelfSupModelMF'
+    optimizer:
+        name: 'Adam'
+        depth:
+            lr: 0.0002
+        pose:
+            lr: 0.0002
+    scheduler:
+        name: 'StepLR'
+        step_size: 30
+        gamma: 0.5
+    depth_net:
+        name: 'DepthPoseNet'
+        version: 'it12-h-out'
+    loss: 
+        automask_loss: True
+        photometric_reduce_op: 'min'
+    params:
+        crop: ''
+        min_depth: 0.2
+        max_depth: 10.0
+datasets:
+    augmentation:
+        image_shape: (240, 320)
+    train:
+        batch_size: 6
+        dataset: ['Video_Random']
+        path: ['/data/datasets/video/indoor']
+        split: ['']
+        depth_type: ['']
+        repeat: [30]
+        forward_context: 1
+        back_context: 1
+        strides: (2, )
+    validation:
+        dataset: ['Video']
+        path: ['/data/datasets/video/indoor']
+        split: ['']
+        depth_type: ['']
+        forward_context: 1
+        back_context: 1
+        strides: (1, )
+    test:
+        dataset: ['Video']
+        path: ['/data/datasets/video/indoor']
+        split: ['']
+        depth_type: ['']
+        forward_context: 1
+        back_context: 1
+        strides: (2, )

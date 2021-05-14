@@ -1,0 +1,1 @@
+python scripts/infer_pose.py --checkpoint ckpt/PackNet01_MR_selfsup_D.ckpt --input /data0/datasets/kitti/KITTI_tiny/2011_09_26/2011_09_26_drive_0023_sync/image_02/data  --output results/eval/pose  --save png
